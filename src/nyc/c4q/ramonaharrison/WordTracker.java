@@ -8,6 +8,7 @@ import java.util.Scanner;
  * Ramona Harrison
  * WordTracker.java
  */
+
 public class WordTracker {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -34,13 +35,32 @@ public class WordTracker {
             }
 
             if (addMode) {
-                words.put(wordToAdd, 1);
+                if (words.containsKey(wordToAdd)) {
+                    words.put(wordToAdd, words.get(wordToAdd) + 1);
+                } else {
+                    words.put(wordToAdd, 1);
+                }
             } else {
-                words.remove(wordToAdd);
+                if (words.get(wordToAdd) > 1) {
+                    words.put(wordToAdd, words.get(wordToAdd) - 1);
+                } else {
+                    words.remove(wordToAdd);
+                }
+
             }
+
         }
 
         System.out.println("Thanks! You have given me " + words.size() + " word(s)!");
+        if (words.isEmpty()) {
+            System.out.println("Words is empty.");
+        } else {
+            System.out.println("Here they are:");
+            for (String word : words.keySet()) {
+                System.out.println(word + ": " + words.get(word));
+            }
+
+        }
 
     }
 
